@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEARCHLAB — Search Intelligence & IR Analytics Platform</title>
+  <meta name="description" content="Premium Search Intelligence and Analytics Platform: Comparative Study of Boolean Retrieval, TF-IDF Vector Space Model, and PageRank Link Authority.">
+  <link rel="stylesheet" href="./src/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ======================================================================
+         SIDEBAR NAVIGATION
+         ====================================================================== -->
+    <aside class="sidebar" id="appSidebar">
+      <!-- Sidebar Header / Branding -->
+      <div class="sidebar-header">
+        <a href="javascript:void(0)" class="brand-group" onclick="window.irApp && window.irApp.switchTab('overview')">
+          <div class="brand-logo-icon">SL</div>
+          <div class="brand-info">
+            <div class="brand-name">
+              SEARCHLAB
+              <span class="brand-badge">v2.4</span>
+            </div>
+            <div class="brand-sub">Search Intelligence</div>
+          </div>
+        </a>
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Toggle Sidebar" aria-label="Toggle Sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+        </button>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Platform Navigation</div>
+
+        <!-- 1. Overview -->
+        <a href="javascript:void(0)" class="nav-item active" data-tab="overview" id="navItemOverview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span class="nav-label">Overview</span>
+          <span class="nav-badge">Home</span>
+        </a>
+
+        <!-- 2. Search Engine -->
+        <a href="javascript:void(0)" class="nav-item" data-tab="search" id="navItemSearch">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span class="nav-label">Search Engine</span>
+        </a>
+
+        <!-- 3. Algorithm Lab -->
+        <a href="javascript:void(0)" class="nav-item" data-tab="lab" id="navItemLab">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+          <span class="nav-label">Algorithm Lab</span>
+        </a>
+
+        <!-- 4. Comparison -->
+        <a href="javascript:void(0)" class="nav-item" data-tab="compare" id="navItemCompare">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+          <span class="nav-label">Comparison</span>
+          <span class="nav-badge">3-Way</span>
+        </a>
+
+        <!-- 5. Analytics -->
+        <a href="javascript:void(0)" class="nav-item" data-tab="analytics" id="navItemAnalytics">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span class="nav-label">Analytics</span>
+          <span class="nav-badge" style="background: var(--accent-success-subtle); color: var(--accent-success);">P@10</span>
+        </a>
+
+        <!-- 6. Graph Explorer -->
+        <a href="javascript:void(0)" class="nav-item" data-tab="graph" id="navItemGraph">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          <span class="nav-label">Graph Explorer</span>
+        </a>
+
+        <div class="nav-section-label" style="margin-top: 0.5rem;">Documentation</div>
+
+        <!-- 7. About Project -->
+        <a href="javascript:void(0)" class="nav-item" data-tab="about" id="navItemAbout">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span class="nav-label">About Project</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="system-status-card">
+          <div class="status-header">
+            <span class="status-indicator">
+              <span class="status-dot"></span>
+              Index Healthy
+            </span>
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-tertiary);">45 Docs</span>
+          </div>
+          <div class="status-detail-text">
+            1,207 vocabulary terms<br>
+            PageRank converged (d=0.85)
+          </div>
+        </div>
+
+        <div class="sidebar-actions">
+          <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+          <span style="font-size: 0.72rem; color: var(--text-tertiary); font-family: var(--font-mono);">KTU IR Capstone</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         MAIN VIEWPORT
+         ====================================================================== -->
+    <main class="main-viewport">
+
+      <!-- Sticky Top Header -->
+      <header class="top-bar">
+        <div class="breadcrumb-group">
+          <span class="breadcrumb-root">SearchLab</span>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current" id="breadcrumbCurrent">Overview & Dashboard</span>
+        </div>
+
+        <div class="top-bar-actions">
+          <!-- Global Search trigger button -->
+          <button class="quick-search-trigger" id="quickSearchTrigger" title="Quick Search (Cmd+K)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>Search or jump to...</span>
+            <span class="shortcut-badge">⌘K</span>
+          </button>
+
+          <!-- Corpus status pill -->
+          <div class="corpus-pill-badge">
+            <span class="corpus-pill-dot"></span>
+            <span>Simple English Wikipedia Corpus</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable Main Content -->
+      <div class="content-area">
+        <div class="content-max-width">
+
+          <!-- TAB 1: OVERVIEW & DASHBOARD -->
+          <section id="tab-overview" class="tab-section">
+            <div id="overviewContainer">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </section>
+
+          <!-- TAB 2: SEARCH ENGINE -->
+          <section id="tab-search" class="tab-section" style="display: none;">
+            <div class="bento-grid">
+              
+              <!-- Search Controls Bento Card (12 Cols) -->
+              <div class="bento-card col-12">
+                <!-- Search Input Form -->
+                <form id="searchForm" class="search-bar-container">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <input
+                    type="text"
+                    id="searchInput"
+                    class="search-input-field"
+                    placeholder="Ask a question or enter keywords (e.g. 'what is solar energy', 'climate change')..."
+                    value="what is solar energy"
+                    autocomplete="off"
+                    required
+                  />
+                  <button type="submit" class="search-btn-primary">
+                    Search
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </form>
+
+                <!-- Algorithm Selector & Settings Row -->
+                <div class="search-controls-bar">
+                  <div class="algo-segmented-control">
+                    <button type="button" class="algo-segment-btn active" data-algo="hybrid">
+                      PageRank + TF-IDF
+                      <span class="kpi-badge" style="background: var(--accent-purple-subtle); color: var(--accent-purple); font-size: 0.65rem;">70/30</span>
+                    </button>
+                    <button type="button" class="algo-segment-btn" data-algo="tfidf">
+                      TF-IDF Vector Space
+                    </button>
+                    <button type="button" class="algo-segment-btn" data-algo="boolean_and">
+                      Boolean (AND)
+                    </button>
+                    <button type="button" class="algo-segment-btn" data-algo="boolean_or">
+                      Boolean (OR)
+                    </button>
+                  </div>
+
+                  <!-- Hybrid Weight Tuning Slider -->
+                  <div class="weight-tuning-bar">
+                    <span style="font-weight: 600; font-size: 0.75rem;">Weight Tuning:</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-secondary);">TF-IDF</span>
+                    <input type="range" id="weightTfIdfSlider" min="0" max="1" step="0.05" value="0.70" class="weight-slider" style="width: 70px;">
+                    <input type="range" id="weightPrSlider" min="0" max="1" step="0.05" value="0.30" class="weight-slider" style="width: 70px;">
+                    <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-secondary);">PR</span>
+                    <span id="weightRatioLabel" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--accent-primary);">
+                      70% TF-IDF / 30% PageRank
+                    </span>
+                  </div>
+
+                  <!-- Extractive Quick Answer Toggle -->
+                  <label class="toggle-switch-label">
+                    <input type="checkbox" id="quickAnswerToggle" class="toggle-input" checked>
+                    <span>⚡ Quick Answer</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Live Execution Pipeline Telemetry (12 Cols) -->
+              <div class="bento-card col-12" id="searchPipelineSection">
+                <div class="bento-header" style="margin-bottom: 0.5rem;">
+                  <div class="bento-title-group">
+                    <div class="bento-icon-box">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    </div>
+                    <div>
+                      <div class="bento-title">Execution Pipeline Telemetry</div>
+                      <div class="bento-subtitle">Measured sub-millisecond retrieval stages</div>
+                    </div>
+                  </div>
+                  <span class="kpi-badge primary">ACTIVE ENGINE</span>
+                </div>
+                <div id="pipelineTrack" style="width: 100%;">
+                  <!-- Filled dynamically by app.js -->
+                </div>
+              </div>
+
+              <!-- Quick Answer Hero Card Container (12 Cols) -->
+              <div class="col-12" id="quickAnswerContainer">
+                <!-- Rendered dynamically -->
+              </div>
+
+              <!-- Results Meta Bar & Grid (12 Cols) -->
+              <div class="col-12">
+                <div id="resultsMetaBar"></div>
+                <div id="searchResultsContainer" class="search-results-grid" style="margin-top: 0.75rem;">
+                  <!-- Result cards injected dynamically -->
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- TAB 3: ALGORITHM LAB -->
+          <section id="tab-lab" class="tab-section" style="display: none;">
+            <div id="labContainer">
+              <!-- Injected dynamically by app.js -->
+            </div>
+          </section>
+
+          <!-- TAB 4: ALGORITHM COMPARISON -->
+          <section id="tab-compare" class="tab-section" style="display: none;">
+            <div id="comparisonContainer">
+              <!-- Injected dynamically by app.js -->
+            </div>
+          </section>
+
+          <!-- TAB 5: ANALYTICS DASHBOARD -->
+          <section id="tab-analytics" class="tab-section" style="display: none;">
+            <div id="analyticsContainer">
+              <!-- Injected dynamically by app.js -->
+            </div>
+          </section>
+
+          <!-- TAB 6: PAGERANK GRAPH EXPLORER -->
+          <section id="tab-graph" class="tab-section" style="display: none;">
+            <div id="graphContainer">
+              <!-- Injected dynamically by app.js -->
+            </div>
+          </section>
+
+          <!-- TAB 7: ABOUT PROJECT -->
+          <section id="tab-about" class="tab-section" style="display: none;">
+            <div id="aboutContainer">
+              <!-- Injected dynamically by app.js -->
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Document Inspection Modal -->
+  <div class="modal-overlay" id="docModalOverlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      <div id="docModalContent">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Standalone Module Application -->
+  <script type="module" src="./src/js/app.js"></script>
+</body>
+</html>

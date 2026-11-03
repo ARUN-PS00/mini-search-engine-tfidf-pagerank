@@ -1,0 +1,17 @@
+{
+  "name": "searchlab-ir-engine",
+  "version": "2.4.0",
+  "type": "module",
+  "description": "SEARCHLAB — Search Intelligence & IR Analytics Platform: Comparative Study of Boolean Retrieval, TF-IDF Vector Space, and PageRank",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node build_bundle.js",
+    "bundle": "node build_bundle.js",
+    "preview": "vite preview",
+    "benchmark": "node execute_comprehensive_evaluation.js",
+    "test": "node test_audit.js"
+  },
+  "devDependencies": {
+    "vite": "^8.3.5"
+  }
+}

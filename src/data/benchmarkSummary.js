@@ -1,0 +1,8324 @@
+export const PRECOMPUTED_BENCHMARK_SUMMARY = {
+  "metadata": {
+    "title": "Mini Search Engine Comparative Evaluation Summary",
+    "project": "Mini Search Engine Using TF-IDF and PageRank: A Comparative Study of Text Retrieval and Link-Based Ranking",
+    "date": "2026-11-02T05:48:56.532Z",
+    "environment": {
+      "date": "2026-11-02T05:48:56.532Z",
+      "localTime": "2/11/2026, 11:18:56 am",
+      "nodeVersion": "v22.16.0",
+      "v8Version": "12.4.254.21-node.26",
+      "osType": "Windows_NT",
+      "osRelease": "10.0.26300",
+      "osPlatform": "win32",
+      "osArch": "x64",
+      "cpuModel": "11th Gen Intel(R) Core(TM) i5-11260H @ 2.60GHz",
+      "cpuCores": 12,
+      "cpuSpeedMhz": 2611,
+      "totalMemoryBytes": 8299032576,
+      "totalMemoryGB": 7.73,
+      "freeMemoryGB": 1.47
+    },
+    "dataset": {
+      "name": "Curated Simple English Wikipedia Knowledge Corpus",
+      "totalDocuments": 45,
+      "totalVocabularySize": 1207,
+      "graphNodes": 45,
+      "graphEdges": 179,
+      "pageRankDampingFactor": 0.85,
+      "pageRankIterationsToConvergence": 47,
+      "pageRankConverged": true,
+      "indexBuildTimeMs": 7.64,
+      "pageRankComputeTimeMs": 2.5
+    },
+    "benchmarkParameters": {
+      "totalQueries": 30,
+      "categoriesCount": 5,
+      "warmUpCycles": 5,
+      "measuredRepetitionsPerQuery": 20,
+      "totalTimedExecutions": 2400,
+      "evaluationMetric": "Precision@10 (Number of relevant documents in top 10 / 10)",
+      "timingBoundary": "Search execution only (excludes dataset loading, indexing, and UI rendering)"
+    }
+  },
+  "keyFindings": {
+    "bestPrecisionAt10Method": {
+      "name": "TF-IDF + PageRank Hybrid (0.70 / 0.30)",
+      "id": "hybrid",
+      "meanPrecisionAt10": 0.28
+    },
+    "fastestMethodByMedianLatency": {
+      "name": "Boolean (OR)",
+      "id": "boolean_or",
+      "medianLatencyMs": 0.0207
+    }
+  },
+  "summaryByAlgorithm": {
+    "boolean_and": {
+      "id": "boolean_and",
+      "name": "Boolean (AND)",
+      "meanPrecisionAt10": 0.2233,
+      "stdPrecisionAt10": 0.1606,
+      "medianLatencyMs": 0.0261,
+      "pooledMedianLatencyMs": 0.0279,
+      "meanLatencyMs": 0.037,
+      "stdLatencyMs": 0.0622,
+      "minLatencyMs": 0.0174,
+      "maxLatencyMs": 1.3369
+    },
+    "boolean_or": {
+      "id": "boolean_or",
+      "name": "Boolean (OR)",
+      "meanPrecisionAt10": 0.2733,
+      "stdPrecisionAt10": 0.1413,
+      "medianLatencyMs": 0.0207,
+      "pooledMedianLatencyMs": 0.022,
+      "meanLatencyMs": 0.0305,
+      "stdLatencyMs": 0.0874,
+      "minLatencyMs": 0.0136,
+      "maxLatencyMs": 2.0949
+    },
+    "tfidf": {
+      "id": "tfidf",
+      "name": "TF-IDF Vector Space",
+      "meanPrecisionAt10": 0.2767,
+      "stdPrecisionAt10": 0.1359,
+      "medianLatencyMs": 0.1072,
+      "pooledMedianLatencyMs": 0.1504,
+      "meanLatencyMs": 0.1626,
+      "stdLatencyMs": 0.0835,
+      "minLatencyMs": 0.0911,
+      "maxLatencyMs": 0.6783
+    },
+    "hybrid": {
+      "id": "hybrid",
+      "name": "TF-IDF + PageRank Hybrid (0.70 / 0.30)",
+      "meanPrecisionAt10": 0.28,
+      "stdPrecisionAt10": 0.1376,
+      "medianLatencyMs": 0.1232,
+      "pooledMedianLatencyMs": 0.1533,
+      "meanLatencyMs": 0.1722,
+      "stdLatencyMs": 0.0909,
+      "minLatencyMs": 0.0927,
+      "maxLatencyMs": 0.9584
+    }
+  },
+  "categorySummary": {
+    "Single-Word": {
+      "category": "Single-Word",
+      "queryCount": 6,
+      "meanPrecisionAt10": {
+        "boolean_and": 0.3667,
+        "boolean_or": 0.3667,
+        "tfidf": 0.3667,
+        "hybrid": 0.3667
+      },
+      "medianLatencyMs": {
+        "boolean_and": 0.0232,
+        "boolean_or": 0.0188,
+        "tfidf": 0.1013,
+        "hybrid": 0.1131
+      }
+    },
+    "Multiword": {
+      "category": "Multiword",
+      "queryCount": 8,
+      "meanPrecisionAt10": {
+        "boolean_and": 0.325,
+        "boolean_or": 0.3625,
+        "tfidf": 0.35,
+        "hybrid": 0.35
+      },
+      "medianLatencyMs": {
+        "boolean_and": 0.0294,
+        "boolean_or": 0.0262,
+        "tfidf": 0.1632,
+        "hybrid": 0.1816
+      }
+    },
+    "Ambiguous": {
+      "category": "Ambiguous",
+      "queryCount": 5,
+      "meanPrecisionAt10": {
+        "boolean_and": 0.1,
+        "boolean_or": 0.1,
+        "tfidf": 0.1,
+        "hybrid": 0.1
+      },
+      "medianLatencyMs": {
+        "boolean_and": 0.019,
+        "boolean_or": 0.0147,
+        "tfidf": 0.0993,
+        "hybrid": 0.0982
+      }
+    },
+    "Rare/Specific": {
+      "category": "Rare/Specific",
+      "queryCount": 5,
+      "meanPrecisionAt10": {
+        "boolean_and": 0.2,
+        "boolean_or": 0.2,
+        "tfidf": 0.2,
+        "hybrid": 0.2
+      },
+      "medianLatencyMs": {
+        "boolean_and": 0.0241,
+        "boolean_or": 0.0186,
+        "tfidf": 0.1025,
+        "hybrid": 0.1071
+      }
+    },
+    "Natural-Language": {
+      "category": "Natural-Language",
+      "queryCount": 6,
+      "meanPrecisionAt10": {
+        "boolean_and": 0.0667,
+        "boolean_or": 0.2667,
+        "tfidf": 0.3,
+        "hybrid": 0.3167
+      },
+      "medianLatencyMs": {
+        "boolean_and": 0.0316,
+        "boolean_or": 0.0314,
+        "tfidf": 0.2111,
+        "hybrid": 0.2235
+      }
+    }
+  },
+  "detailedQueries": [
+    {
+      "id": "Q01",
+      "category": "Single-Word",
+      "query": "solar",
+      "description": "Evaluates single-term retrieval for solar topics",
+      "relevantDocIds": [
+        "doc_25",
+        "doc_26",
+        "doc_32"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0267,
+          "meanLatencyMs": 0.0305,
+          "allLatenciesMs": [
+            0.0379,
+            0.0495,
+            0.0301,
+            0.0285,
+            0.0272,
+            0.0261,
+            0.0257,
+            0.0706,
+            0.0273,
+            0.0236,
+            0.0237,
+            0.0418,
+            0.0274,
+            0.0245,
+            0.029,
+            0.0236,
+            0.0239,
+            0.0232,
+            0.0237,
+            0.0232
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0222,
+          "meanLatencyMs": 0.0344,
+          "allLatenciesMs": [
+            0.0243,
+            0.0254,
+            0.0256,
+            0.0224,
+            0.0219,
+            0.0216,
+            0.022,
+            0.1887,
+            0.0788,
+            0.0203,
+            0.0196,
+            0.0241,
+            0.0411,
+            0.0202,
+            0.0273,
+            0.02,
+            0.0199,
+            0.0203,
+            0.0213,
+            0.0229
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.107,
+          "meanLatencyMs": 0.1503,
+          "allLatenciesMs": [
+            0.1095,
+            0.1202,
+            0.1088,
+            0.1066,
+            0.1265,
+            0.1319,
+            0.265,
+            0.6783,
+            0.1104,
+            0.0987,
+            0.2365,
+            0.1046,
+            0.1074,
+            0.1043,
+            0.1013,
+            0.0971,
+            0.0995,
+            0.1001,
+            0.103,
+            0.0969
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.6779,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.3195,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0761,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.0684,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.0655,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0639,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.0614,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.0575,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1223,
+          "meanLatencyMs": 0.1432,
+          "allLatenciesMs": [
+            0.1263,
+            0.1476,
+            0.1232,
+            0.1248,
+            0.1829,
+            0.1525,
+            0.1215,
+            0.2987,
+            0.1322,
+            0.1195,
+            0.1158,
+            0.1143,
+            0.1336,
+            0.1145,
+            0.3042,
+            0.1111,
+            0.1094,
+            0.1101,
+            0.1119,
+            0.1101
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.9423,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.3703,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3122,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.2412,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.1917,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1097,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0654,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.009,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q02",
+      "category": "Single-Word",
+      "query": "energy",
+      "description": "Evaluates broad term retrieval for energy and power",
+      "relevantDocIds": [
+        "doc_25",
+        "doc_26",
+        "doc_27",
+        "doc_29",
+        "doc_30",
+        "doc_33"
+      ],
+      "totalRelevantInCorpus": 6,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 6,
+          "precisionAt10": 0.6,
+          "medianLatencyMs": 0.025,
+          "meanLatencyMs": 0.0274,
+          "allLatenciesMs": [
+            0.0275,
+            0.0356,
+            0.0265,
+            0.0262,
+            0.03,
+            0.0244,
+            0.0261,
+            0.0686,
+            0.0263,
+            0.025,
+            0.0251,
+            0.022,
+            0.0231,
+            0.0235,
+            0.0287,
+            0.0222,
+            0.0215,
+            0.0218,
+            0.0219,
+            0.0222
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 9,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 6,
+          "precisionAt10": 0.6,
+          "medianLatencyMs": 0.0207,
+          "meanLatencyMs": 0.022,
+          "allLatenciesMs": [
+            0.0236,
+            0.023,
+            0.0218,
+            0.0214,
+            0.0215,
+            0.0216,
+            0.0217,
+            0.0458,
+            0.0238,
+            0.0198,
+            0.0199,
+            0.0191,
+            0.0199,
+            0.0198,
+            0.0215,
+            0.0189,
+            0.0199,
+            0.0189,
+            0.019,
+            0.0187
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 9,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 6,
+          "precisionAt10": 0.6,
+          "medianLatencyMs": 0.1073,
+          "meanLatencyMs": 0.1368,
+          "allLatenciesMs": [
+            0.1152,
+            0.4101,
+            0.1095,
+            0.1128,
+            0.132,
+            0.1302,
+            0.1005,
+            0.2336,
+            0.1052,
+            0.118,
+            0.0967,
+            0.0969,
+            0.1007,
+            0.1278,
+            0.0975,
+            0.0965,
+            0.0953,
+            0.0963,
+            0.2646,
+            0.0962
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.4595,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.4402,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.3146,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.2789,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.1657,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.1563,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.1179,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.0767,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.0665,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 6,
+          "precisionAt10": 0.6,
+          "medianLatencyMs": 0.124,
+          "meanLatencyMs": 0.133,
+          "allLatenciesMs": [
+            0.1299,
+            0.133,
+            0.1284,
+            0.128,
+            0.1517,
+            0.1541,
+            0.1207,
+            0.2623,
+            0.1258,
+            0.1415,
+            0.1168,
+            0.1197,
+            0.1222,
+            0.149,
+            0.1144,
+            0.1123,
+            0.1113,
+            0.1128,
+            0.1147,
+            0.1117
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.9945,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.6915,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.6212,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.4419,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.4185,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.3681,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.2852,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.1109,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q03",
+      "category": "Single-Word",
+      "query": "electricity",
+      "description": "Evaluates retrieval of electrical physics and generation",
+      "relevantDocIds": [
+        "doc_27",
+        "doc_25",
+        "doc_26",
+        "doc_29",
+        "doc_30",
+        "doc_32"
+      ],
+      "totalRelevantInCorpus": 6,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 6,
+          "precisionAt10": 0.6,
+          "medianLatencyMs": 0.0252,
+          "meanLatencyMs": 0.0269,
+          "allLatenciesMs": [
+            0.0271,
+            0.036,
+            0.0259,
+            0.0271,
+            0.0265,
+            0.0259,
+            0.0239,
+            0.0545,
+            0.0279,
+            0.0246,
+            0.0229,
+            0.0227,
+            0.0233,
+            0.0239,
+            0.0227,
+            0.0225,
+            0.0221,
+            0.0222,
+            0.0257,
+            0.0302
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 6,
+          "precisionAt10": 0.6,
+          "medianLatencyMs": 0.0203,
+          "meanLatencyMs": 0.022,
+          "allLatenciesMs": [
+            0.0224,
+            0.0241,
+            0.0236,
+            0.0215,
+            0.0223,
+            0.0208,
+            0.0204,
+            0.0447,
+            0.0212,
+            0.0203,
+            0.0194,
+            0.0196,
+            0.0199,
+            0.02,
+            0.0192,
+            0.0238,
+            0.0189,
+            0.0189,
+            0.0194,
+            0.0192
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 6,
+          "precisionAt10": 0.6,
+          "medianLatencyMs": 0.104,
+          "meanLatencyMs": 0.1175,
+          "allLatenciesMs": [
+            0.1069,
+            0.1097,
+            0.1062,
+            0.1068,
+            0.1373,
+            0.1371,
+            0.0996,
+            0.2709,
+            0.1514,
+            0.1028,
+            0.0972,
+            0.1001,
+            0.1005,
+            0.1332,
+            0.1052,
+            0.0982,
+            0.0968,
+            0.0969,
+            0.0972,
+            0.0968
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3462,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.2396,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1916,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.1368,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.1086,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.0655,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.0575,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.0484,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 6,
+          "precisionAt10": 0.6,
+          "medianLatencyMs": 0.1188,
+          "meanLatencyMs": 0.1299,
+          "allLatenciesMs": [
+            0.1249,
+            0.1265,
+            0.123,
+            0.1248,
+            0.1874,
+            0.1505,
+            0.1173,
+            0.2704,
+            0.1213,
+            0.1171,
+            0.1128,
+            0.1236,
+            0.1203,
+            0.1127,
+            0.1101,
+            0.1107,
+            0.1099,
+            0.1099,
+            0.1098,
+            0.115
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.5227,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.5017,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.4372,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.3408,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.2578,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.2375,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.0402,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q04",
+      "category": "Single-Word",
+      "query": "climate",
+      "description": "Evaluates climate systems and global warming topics",
+      "relevantDocIds": [
+        "doc_28",
+        "doc_26",
+        "doc_25",
+        "doc_34"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0211,
+          "meanLatencyMs": 0.0246,
+          "allLatenciesMs": [
+            0.0224,
+            0.022,
+            0.0222,
+            0.0233,
+            0.0243,
+            0.0532,
+            0.0208,
+            0.0571,
+            0.0241,
+            0.02,
+            0.0195,
+            0.0215,
+            0.0202,
+            0.0214,
+            0.0208,
+            0.0196,
+            0.0196,
+            0.0195,
+            0.0199,
+            0.0199
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0168,
+          "meanLatencyMs": 0.018,
+          "allLatenciesMs": [
+            0.0178,
+            0.0178,
+            0.0174,
+            0.0171,
+            0.0173,
+            0.0189,
+            0.0166,
+            0.0384,
+            0.0179,
+            0.0163,
+            0.0161,
+            0.017,
+            0.0166,
+            0.0165,
+            0.0165,
+            0.0158,
+            0.0155,
+            0.0159,
+            0.0157,
+            0.0179
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0976,
+          "meanLatencyMs": 0.1109,
+          "allLatenciesMs": [
+            0.1043,
+            0.1036,
+            0.0996,
+            0.0999,
+            0.1235,
+            0.1939,
+            0.0953,
+            0.2143,
+            0.1026,
+            0.0941,
+            0.0922,
+            0.1345,
+            0.0973,
+            0.0942,
+            0.0928,
+            0.0938,
+            0.0943,
+            0.0977,
+            0.0976,
+            0.0934
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.2409,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.0894,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0836,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1054,
+          "meanLatencyMs": 0.1341,
+          "allLatenciesMs": [
+            0.1123,
+            0.1098,
+            0.1147,
+            0.1073,
+            0.127,
+            0.1369,
+            0.1032,
+            0.4843,
+            0.1043,
+            0.1018,
+            0.1008,
+            0.1109,
+            0.1038,
+            0.1004,
+            0.0976,
+            0.0979,
+            0.1065,
+            0.2664,
+            0.0978,
+            0.0979
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.8289,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3262,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q05",
+      "category": "Single-Word",
+      "query": "battery",
+      "description": "Evaluates electrochemical energy storage systems",
+      "relevantDocIds": [
+        "doc_29",
+        "doc_27",
+        "doc_34",
+        "doc_26"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 4,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0213,
+          "meanLatencyMs": 0.0238,
+          "allLatenciesMs": [
+            0.0218,
+            0.0218,
+            0.0234,
+            0.0237,
+            0.0207,
+            0.022,
+            0.0199,
+            0.0282,
+            0.0233,
+            0.0196,
+            0.0188,
+            0.0225,
+            0.0208,
+            0.0196,
+            0.0198,
+            0.0193,
+            0.0202,
+            0.0319,
+            0.0191,
+            0.0591
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": false
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 4,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0173,
+          "meanLatencyMs": 0.0173,
+          "allLatenciesMs": [
+            0.0182,
+            0.0178,
+            0.0178,
+            0.0175,
+            0.0165,
+            0.0172,
+            0.0204,
+            0.0185,
+            0.0179,
+            0.0164,
+            0.0159,
+            0.0165,
+            0.0173,
+            0.0169,
+            0.0161,
+            0.0155,
+            0.0165,
+            0.0189,
+            0.0158,
+            0.0181
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 4,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0985,
+          "meanLatencyMs": 0.1077,
+          "allLatenciesMs": [
+            0.1023,
+            0.1024,
+            0.1029,
+            0.1018,
+            0.1223,
+            0.1291,
+            0.0983,
+            0.1217,
+            0.0987,
+            0.0998,
+            0.0932,
+            0.095,
+            0.2237,
+            0.0955,
+            0.0945,
+            0.0949,
+            0.0941,
+            0.0945,
+            0.0928,
+            0.0974
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.3519,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.0836,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0781,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.0664,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 4,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1075,
+          "meanLatencyMs": 0.1119,
+          "allLatenciesMs": [
+            0.1116,
+            0.1135,
+            0.11,
+            0.1102,
+            0.1367,
+            0.141,
+            0.1374,
+            0.1116,
+            0.106,
+            0.1035,
+            0.1015,
+            0.1037,
+            0.1089,
+            0.1019,
+            0.0995,
+            0.1035,
+            0.0997,
+            0.1043,
+            0.0999,
+            0.1336
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.9106,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3423,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.1533,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0288,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q06",
+      "category": "Single-Word",
+      "query": "history",
+      "description": "Evaluates historical documentation and ancient empires",
+      "relevantDocIds": [
+        "doc_38",
+        "doc_39",
+        "doc_40"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0202,
+          "meanLatencyMs": 0.0461,
+          "allLatenciesMs": [
+            0.021,
+            0.0202,
+            0.2239,
+            0.0215,
+            0.0195,
+            0.0202,
+            0.109,
+            0.2298,
+            0.0201,
+            0.0199,
+            0.0193,
+            0.0267,
+            0.0211,
+            0.0191,
+            0.0185,
+            0.019,
+            0.0187,
+            0.0199,
+            0.0183,
+            0.036
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_38",
+              "title": "History",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0154,
+          "meanLatencyMs": 0.0166,
+          "allLatenciesMs": [
+            0.017,
+            0.0159,
+            0.0203,
+            0.0153,
+            0.0219,
+            0.0154,
+            0.0194,
+            0.0211,
+            0.0153,
+            0.0152,
+            0.015,
+            0.0155,
+            0.0158,
+            0.016,
+            0.0146,
+            0.0149,
+            0.0149,
+            0.0149,
+            0.0148,
+            0.0183
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_38",
+              "title": "History",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0984,
+          "meanLatencyMs": 0.1119,
+          "allLatenciesMs": [
+            0.1004,
+            0.1017,
+            0.112,
+            0.1056,
+            0.1218,
+            0.1278,
+            0.1223,
+            0.1101,
+            0.0964,
+            0.095,
+            0.0926,
+            0.2394,
+            0.0965,
+            0.0955,
+            0.092,
+            0.0949,
+            0.0927,
+            0.0939,
+            0.0923,
+            0.155
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0.4173,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0994,
+          "meanLatencyMs": 0.107,
+          "allLatenciesMs": [
+            0.1216,
+            0.1038,
+            0.1055,
+            0.1007,
+            0.1293,
+            0.1361,
+            0.1442,
+            0.1026,
+            0.0966,
+            0.105,
+            0.0945,
+            0.0981,
+            0.0953,
+            0.0945,
+            0.0936,
+            0.0981,
+            0.0928,
+            0.0947,
+            0.0928,
+            0.1406
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q07",
+      "category": "Multiword",
+      "query": "solar energy",
+      "description": "Evaluates multi-term query on solar power and radiation",
+      "relevantDocIds": [
+        "doc_25",
+        "doc_26",
+        "doc_32",
+        "doc_27"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 6,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0317,
+          "meanLatencyMs": 0.042,
+          "allLatenciesMs": [
+            0.0345,
+            0.0328,
+            0.0347,
+            0.032,
+            0.0309,
+            0.1172,
+            0.0337,
+            0.0345,
+            0.0317,
+            0.0295,
+            0.028,
+            0.0319,
+            0.0317,
+            0.0289,
+            0.0291,
+            0.163,
+            0.0281,
+            0.0289,
+            0.0277,
+            0.0313
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.0282,
+          "meanLatencyMs": 0.0328,
+          "allLatenciesMs": [
+            0.0311,
+            0.0304,
+            0.0312,
+            0.0284,
+            0.0279,
+            0.0483,
+            0.0814,
+            0.0288,
+            0.0344,
+            0.0258,
+            0.0251,
+            0.0266,
+            0.0543,
+            0.0252,
+            0.0251,
+            0.0291,
+            0.0254,
+            0.0258,
+            0.0259,
+            0.0267
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.5,
+              "isRelevant": true
+            },
+            {
+              "rank": 9,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.5,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.161,
+          "meanLatencyMs": 0.1928,
+          "allLatenciesMs": [
+            0.1643,
+            0.1663,
+            0.1725,
+            0.1622,
+            0.2054,
+            0.2108,
+            0.3543,
+            0.1786,
+            0.1598,
+            0.157,
+            0.1577,
+            0.1578,
+            0.1644,
+            0.1564,
+            0.1532,
+            0.1588,
+            0.1506,
+            0.1532,
+            0.1516,
+            0.5213
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.6822,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3675,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.3521,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.2836,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.2178,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.1562,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.1259,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.1083,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0549,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0461,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.1818,
+          "meanLatencyMs": 0.193,
+          "allLatenciesMs": [
+            0.1905,
+            0.1922,
+            0.1929,
+            0.1928,
+            0.2144,
+            0.2174,
+            0.3485,
+            0.1942,
+            0.1804,
+            0.1784,
+            0.1753,
+            0.1791,
+            0.1831,
+            0.1737,
+            0.1708,
+            0.1801,
+            0.1689,
+            0.1698,
+            0.1696,
+            0.1875
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.9428,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.6483,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.3631,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.3625,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.3541,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.2815,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.2765,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.1891,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1177,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q08",
+      "category": "Multiword",
+      "query": "renewable energy",
+      "description": "Evaluates clean sustainable energy sources",
+      "relevantDocIds": [
+        "doc_26",
+        "doc_25",
+        "doc_30",
+        "doc_33",
+        "doc_28"
+      ],
+      "totalRelevantInCorpus": 5,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 6,
+          "relevantFoundInTop10": 5,
+          "precisionAt10": 0.5,
+          "medianLatencyMs": 0.0315,
+          "meanLatencyMs": 0.0351,
+          "allLatenciesMs": [
+            0.0451,
+            0.0317,
+            0.0336,
+            0.0332,
+            0.0313,
+            0.0307,
+            0.0734,
+            0.0316,
+            0.0323,
+            0.0287,
+            0.0278,
+            0.0282,
+            0.0295,
+            0.0328,
+            0.0278,
+            0.0479,
+            0.028,
+            0.028,
+            0.0284,
+            0.0523
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 5,
+          "precisionAt10": 0.5,
+          "medianLatencyMs": 0.027,
+          "meanLatencyMs": 0.035,
+          "allLatenciesMs": [
+            0.0603,
+            0.07,
+            0.0288,
+            0.0286,
+            0.0265,
+            0.0263,
+            0.0513,
+            0.0283,
+            0.0261,
+            0.0256,
+            0.0243,
+            0.0247,
+            0.025,
+            0.086,
+            0.0239,
+            0.0275,
+            0.0288,
+            0.0237,
+            0.0241,
+            0.0406
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.5,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 5,
+          "precisionAt10": 0.5,
+          "medianLatencyMs": 0.1671,
+          "meanLatencyMs": 0.1758,
+          "allLatenciesMs": [
+            0.1978,
+            0.169,
+            0.1835,
+            0.2003,
+            0.1915,
+            0.1943,
+            0.302,
+            0.1658,
+            0.1709,
+            0.1548,
+            0.153,
+            0.1549,
+            0.1605,
+            0.1654,
+            0.1515,
+            0.169,
+            0.1519,
+            0.1588,
+            0.152,
+            0.1685
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.5739,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.3482,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.226,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.2128,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.1564,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.1475,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.127,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.0519,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0491,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.045,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 5,
+          "precisionAt10": 0.5,
+          "medianLatencyMs": 0.1805,
+          "meanLatencyMs": 0.1999,
+          "allLatenciesMs": [
+            0.1899,
+            0.1904,
+            0.2263,
+            0.2325,
+            0.2834,
+            0.2138,
+            0.3602,
+            0.1853,
+            0.1808,
+            0.2074,
+            0.1726,
+            0.1763,
+            0.1792,
+            0.1802,
+            0.1676,
+            0.1737,
+            0.1679,
+            0.1672,
+            0.1661,
+            0.1768
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.9945,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.4824,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.4271,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.3892,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.3438,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.3021,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.2222,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1232,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.1018,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q09",
+      "category": "Multiword",
+      "query": "electric vehicle",
+      "description": "Evaluates electric transportation and battery mobility",
+      "relevantDocIds": [
+        "doc_34",
+        "doc_29",
+        "doc_27",
+        "doc_26"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0292,
+          "meanLatencyMs": 0.0341,
+          "allLatenciesMs": [
+            0.0318,
+            0.0303,
+            0.0338,
+            0.0336,
+            0.0437,
+            0.0286,
+            0.0621,
+            0.0295,
+            0.0311,
+            0.0288,
+            0.0274,
+            0.0279,
+            0.0282,
+            0.0766,
+            0.0268,
+            0.029,
+            0.0274,
+            0.0275,
+            0.0274,
+            0.0296
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0248,
+          "meanLatencyMs": 0.0264,
+          "allLatenciesMs": [
+            0.0269,
+            0.0271,
+            0.0263,
+            0.027,
+            0.0311,
+            0.0253,
+            0.0492,
+            0.025,
+            0.0266,
+            0.0247,
+            0.0235,
+            0.0242,
+            0.0242,
+            0.0266,
+            0.0228,
+            0.0238,
+            0.0229,
+            0.0234,
+            0.023,
+            0.0242
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_24",
+              "title": "Claude Shannon",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.5,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1629,
+          "meanLatencyMs": 0.19,
+          "allLatenciesMs": [
+            0.1645,
+            0.1723,
+            0.1653,
+            0.4674,
+            0.2363,
+            0.1886,
+            0.3426,
+            0.1737,
+            0.169,
+            0.1614,
+            0.152,
+            0.1553,
+            0.1601,
+            0.1644,
+            0.152,
+            0.1531,
+            0.1525,
+            0.1537,
+            0.157,
+            0.1596
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.6698,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3242,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.3044,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.0989,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0924,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.0485,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_24",
+              "title": "Claude Shannon",
+              "score": 0.0446,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.0294,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 8,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1815,
+          "meanLatencyMs": 0.2046,
+          "allLatenciesMs": [
+            0.1841,
+            0.2125,
+            0.1901,
+            0.1928,
+            0.2463,
+            0.2057,
+            0.3551,
+            0.4198,
+            0.1788,
+            0.2098,
+            0.1649,
+            0.1685,
+            0.1725,
+            0.2024,
+            0.1622,
+            0.162,
+            0.1618,
+            0.1723,
+            0.1606,
+            0.1693
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.816,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.6223,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.5418,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.2832,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.2423,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.1324,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.1117,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_24",
+              "title": "Claude Shannon",
+              "score": 0.0166,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "category": "Multiword",
+      "query": "wind power",
+      "description": "Evaluates wind turbine generation and grids",
+      "relevantDocIds": [
+        "doc_30",
+        "doc_26",
+        "doc_27",
+        "doc_29"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 6,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.0296,
+          "meanLatencyMs": 0.0481,
+          "allLatenciesMs": [
+            0.0307,
+            0.0314,
+            0.0316,
+            0.0377,
+            0.0354,
+            0.0299,
+            0.0651,
+            0.0961,
+            0.29,
+            0.0282,
+            0.0272,
+            0.028,
+            0.0281,
+            0.034,
+            0.0275,
+            0.0278,
+            0.0276,
+            0.0284,
+            0.0279,
+            0.0294
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.0256,
+          "meanLatencyMs": 0.1308,
+          "allLatenciesMs": [
+            0.0273,
+            0.0261,
+            0.0254,
+            0.0295,
+            0.0259,
+            0.0261,
+            2.0949,
+            0.044,
+            0.041,
+            0.0237,
+            0.0243,
+            0.0234,
+            0.0237,
+            0.0347,
+            0.0245,
+            0.0221,
+            0.0273,
+            0.0235,
+            0.0231,
+            0.0247
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_19",
+              "title": "Matrix multiplication",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.5,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.1645,
+          "meanLatencyMs": 0.2035,
+          "allLatenciesMs": [
+            0.1631,
+            0.1711,
+            0.16,
+            0.1685,
+            0.1974,
+            0.2607,
+            0.3754,
+            0.323,
+            0.2352,
+            0.1551,
+            0.1504,
+            0.1575,
+            0.4241,
+            0.2012,
+            0.1658,
+            0.1504,
+            0.1504,
+            0.1515,
+            0.1506,
+            0.1594
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.8011,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.2294,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.1783,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.1559,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.1225,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.1008,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.0894,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0808,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_19",
+              "title": "Matrix multiplication",
+              "score": 0.0316,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.185,
+          "meanLatencyMs": 0.2055,
+          "allLatenciesMs": [
+            0.1831,
+            0.2399,
+            0.1808,
+            0.1876,
+            0.204,
+            0.2576,
+            0.3496,
+            0.3656,
+            0.1869,
+            0.1685,
+            0.1688,
+            0.1828,
+            0.1902,
+            0.1972,
+            0.207,
+            0.1647,
+            0.1646,
+            0.1718,
+            0.164,
+            0.1749
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.9072,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.4212,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.4075,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.363,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.325,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.2453,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1608,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.1568,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_19",
+              "title": "Matrix multiplication",
+              "score": 0,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "category": "Multiword",
+      "query": "climate change",
+      "description": "Evaluates greenhouse emissions and climate mitigation",
+      "relevantDocIds": [
+        "doc_28",
+        "doc_26",
+        "doc_25",
+        "doc_34"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0278,
+          "meanLatencyMs": 0.0393,
+          "allLatenciesMs": [
+            0.0269,
+            0.0285,
+            0.0275,
+            0.0292,
+            0.0271,
+            0.029,
+            0.0769,
+            0.0872,
+            0.0282,
+            0.0247,
+            0.0242,
+            0.0272,
+            0.032,
+            0.0304,
+            0.0284,
+            0.0244,
+            0.1579,
+            0.0252,
+            0.0254,
+            0.0256
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0207,
+          "meanLatencyMs": 0.0228,
+          "allLatenciesMs": [
+            0.0211,
+            0.0206,
+            0.0205,
+            0.0213,
+            0.0197,
+            0.02,
+            0.0469,
+            0.0408,
+            0.02,
+            0.0237,
+            0.0193,
+            0.0216,
+            0.0207,
+            0.0201,
+            0.0209,
+            0.0186,
+            0.0223,
+            0.0211,
+            0.0183,
+            0.0192
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.161,
+          "meanLatencyMs": 0.1817,
+          "allLatenciesMs": [
+            0.162,
+            0.1595,
+            0.1603,
+            0.1602,
+            0.3875,
+            0.1914,
+            0.3136,
+            0.1757,
+            0.1565,
+            0.1452,
+            0.1448,
+            0.1616,
+            0.1529,
+            0.1667,
+            0.1819,
+            0.1443,
+            0.1474,
+            0.2113,
+            0.1451,
+            0.1671
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.3407,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.1265,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1182,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1613,
+          "meanLatencyMs": 0.1772,
+          "allLatenciesMs": [
+            0.1628,
+            0.1665,
+            0.164,
+            0.167,
+            0.1914,
+            0.2027,
+            0.4077,
+            0.1787,
+            0.1733,
+            0.15,
+            0.1512,
+            0.1598,
+            0.1588,
+            0.1537,
+            0.1543,
+            0.1511,
+            0.1508,
+            0.1541,
+            0.1499,
+            0.1971
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.8289,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3262,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "category": "Multiword",
+      "query": "energy storage",
+      "description": "Evaluates batteries and grid buffering technologies",
+      "relevantDocIds": [
+        "doc_29",
+        "doc_26",
+        "doc_25",
+        "doc_30"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0281,
+          "meanLatencyMs": 0.0388,
+          "allLatenciesMs": [
+            0.0282,
+            0.0281,
+            0.0292,
+            0.0306,
+            0.032,
+            0.1814,
+            0.0868,
+            0.0312,
+            0.0302,
+            0.031,
+            0.0256,
+            0.0258,
+            0.0276,
+            0.0273,
+            0.0264,
+            0.0259,
+            0.0263,
+            0.026,
+            0.026,
+            0.0296
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.0268,
+          "meanLatencyMs": 0.0422,
+          "allLatenciesMs": [
+            0.0277,
+            0.0274,
+            0.0276,
+            0.0278,
+            0.0272,
+            0.0288,
+            0.3409,
+            0.0268,
+            0.0269,
+            0.0243,
+            0.0235,
+            0.0231,
+            0.025,
+            0.0247,
+            0.0238,
+            0.0233,
+            0.0251,
+            0.03,
+            0.0242,
+            0.0354
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.5,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.1634,
+          "meanLatencyMs": 0.1961,
+          "allLatenciesMs": [
+            0.1682,
+            0.1639,
+            0.1996,
+            0.1862,
+            0.189,
+            0.1656,
+            0.6618,
+            0.2255,
+            0.2334,
+            0.1516,
+            0.1497,
+            0.1522,
+            0.1577,
+            0.1574,
+            0.1538,
+            0.16,
+            0.1803,
+            0.1545,
+            0.1487,
+            0.163
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3494,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.2718,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.1942,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.1722,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.1577,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.1488,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.0728,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 0.0609,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.0473,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.041,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.1817,
+          "meanLatencyMs": 0.2116,
+          "allLatenciesMs": [
+            0.2988,
+            0.2153,
+            0.1896,
+            0.3172,
+            0.2059,
+            0.1776,
+            0.393,
+            0.299,
+            0.2216,
+            0.1702,
+            0.1787,
+            0.1717,
+            0.1793,
+            0.1708,
+            0.1707,
+            0.1678,
+            0.1896,
+            0.1666,
+            0.1653,
+            0.184
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.9945,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.5494,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.5405,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.5065,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.4525,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.3476,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.2656,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.107,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 0.0856,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "category": "Multiword",
+      "query": "ancient Rome",
+      "description": "Evaluates Roman civilization and Mediterranean history",
+      "relevantDocIds": [
+        "doc_39",
+        "doc_40",
+        "doc_38"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.028,
+          "meanLatencyMs": 0.0324,
+          "allLatenciesMs": [
+            0.0342,
+            0.0423,
+            0.0295,
+            0.0387,
+            0.0283,
+            0.0277,
+            0.0719,
+            0.0397,
+            0.0292,
+            0.0257,
+            0.0274,
+            0.0261,
+            0.0276,
+            0.0345,
+            0.0274,
+            0.0266,
+            0.0267,
+            0.0265,
+            0.0265,
+            0.0307
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_39",
+              "title": "Ancient Rome",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_38",
+              "title": "History",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_40",
+              "title": "Roman Empire",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0206,
+          "meanLatencyMs": 0.0325,
+          "allLatenciesMs": [
+            0.0232,
+            0.2127,
+            0.0208,
+            0.0237,
+            0.0208,
+            0.0207,
+            0.0452,
+            0.0263,
+            0.0196,
+            0.0199,
+            0.0204,
+            0.0193,
+            0.0382,
+            0.0202,
+            0.0196,
+            0.0194,
+            0.0202,
+            0.0195,
+            0.0187,
+            0.0213
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_39",
+              "title": "Ancient Rome",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_38",
+              "title": "History",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_40",
+              "title": "Roman Empire",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1533,
+          "meanLatencyMs": 0.175,
+          "allLatenciesMs": [
+            0.17,
+            0.1678,
+            0.1538,
+            0.1973,
+            0.1831,
+            0.1517,
+            0.3326,
+            0.2683,
+            0.1529,
+            0.1622,
+            0.1551,
+            0.1465,
+            0.2224,
+            0.1501,
+            0.1499,
+            0.1472,
+            0.1456,
+            0.1464,
+            0.1462,
+            0.1504
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_39",
+              "title": "Ancient Rome",
+              "score": 0.359,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_40",
+              "title": "Roman Empire",
+              "score": 0.2287,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0.1228,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1565,
+          "meanLatencyMs": 0.1845,
+          "allLatenciesMs": [
+            0.2571,
+            0.1662,
+            0.1577,
+            0.2204,
+            0.1986,
+            0.1541,
+            0.3239,
+            0.1875,
+            0.1554,
+            0.27,
+            0.1936,
+            0.1506,
+            0.1994,
+            0.1523,
+            0.1526,
+            0.1496,
+            0.1501,
+            0.1489,
+            0.1492,
+            0.153
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_39",
+              "title": "Ancient Rome",
+              "score": 0.7,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_40",
+              "title": "Roman Empire",
+              "score": 0.3138,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "category": "Multiword",
+      "query": "computer network",
+      "description": "Evaluates inter-computer communication and web protocols",
+      "relevantDocIds": [
+        "doc_31",
+        "doc_10",
+        "doc_15",
+        "doc_24"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.0319,
+          "meanLatencyMs": 0.0434,
+          "allLatenciesMs": [
+            0.0352,
+            0.1166,
+            0.0327,
+            0.0507,
+            0.0341,
+            0.0311,
+            0.0843,
+            0.0364,
+            0.0296,
+            0.0381,
+            0.0307,
+            0.029,
+            0.103,
+            0.0297,
+            0.0291,
+            0.0289,
+            0.0298,
+            0.0294,
+            0.029,
+            0.0413
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_23",
+              "title": "Deep learning",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_10",
+              "title": "World Wide Web",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0357,
+          "meanLatencyMs": 0.047,
+          "allLatenciesMs": [
+            0.0614,
+            0.0387,
+            0.0366,
+            0.0408,
+            0.0399,
+            0.0349,
+            0.0764,
+            0.0367,
+            0.0335,
+            0.186,
+            0.0329,
+            0.0317,
+            0.0365,
+            0.0325,
+            0.0326,
+            0.0321,
+            0.0313,
+            0.0323,
+            0.0319,
+            0.0614
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_23",
+              "title": "Deep learning",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_10",
+              "title": "World Wide Web",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_16",
+              "title": "Alan Turing",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_20",
+              "title": "Artificial intelligence",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_9",
+              "title": "Boolean data type",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_24",
+              "title": "Claude Shannon",
+              "score": 0.5,
+              "isRelevant": true
+            },
+            {
+              "rank": 9,
+              "id": "doc_4",
+              "title": "Inverted index",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_7",
+              "title": "Larry Page",
+              "score": 0.5,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1684,
+          "meanLatencyMs": 0.2129,
+          "allLatenciesMs": [
+            0.238,
+            0.1741,
+            0.1693,
+            0.3779,
+            0.2441,
+            0.3673,
+            0.3389,
+            0.1883,
+            0.1801,
+            0.1634,
+            0.1566,
+            0.1593,
+            0.1675,
+            0.3762,
+            0.1608,
+            0.1569,
+            0.1613,
+            0.1567,
+            0.1558,
+            0.166
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 0.6118,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_23",
+              "title": "Deep learning",
+              "score": 0.3006,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_22",
+              "title": "Natural language processing",
+              "score": 0.1236,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_7",
+              "title": "Larry Page",
+              "score": 0.0907,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_15",
+              "title": "Tim Berners-Lee",
+              "score": 0.0894,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_10",
+              "title": "World Wide Web",
+              "score": 0.0864,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_16",
+              "title": "Alan Turing",
+              "score": 0.0812,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 0.0773,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_20",
+              "title": "Artificial intelligence",
+              "score": 0.0597,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_36",
+              "title": "Microcontroller",
+              "score": 0.0589,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.2072,
+          "meanLatencyMs": 0.2588,
+          "allLatenciesMs": [
+            0.2554,
+            0.2141,
+            0.216,
+            0.2262,
+            0.2343,
+            0.2117,
+            0.9584,
+            0.4471,
+            0.1996,
+            0.1966,
+            0.193,
+            0.1943,
+            0.2027,
+            0.2546,
+            0.1904,
+            0.1859,
+            0.1867,
+            0.1915,
+            0.2207,
+            0.1961
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 0.751,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_23",
+              "title": "Deep learning",
+              "score": 0.3666,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_10",
+              "title": "World Wide Web",
+              "score": 0.3018,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_4",
+              "title": "Inverted index",
+              "score": 0.3,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_5",
+              "title": "Search engine indexing",
+              "score": 0.2719,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.2234,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_7",
+              "title": "Larry Page",
+              "score": 0.1812,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_22",
+              "title": "Natural language processing",
+              "score": 0.1789,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_20",
+              "title": "Artificial intelligence",
+              "score": 0.1644,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_16",
+              "title": "Alan Turing",
+              "score": 0.1512,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "category": "Ambiguous",
+      "query": "Java",
+      "description": "Ambiguous query testing programming vs geographical contexts",
+      "relevantDocIds": [
+        "doc_41",
+        "doc_3",
+        "doc_31"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.021,
+          "meanLatencyMs": 0.0395,
+          "allLatenciesMs": [
+            0.0231,
+            0.0244,
+            0.0218,
+            0.0291,
+            0.0201,
+            0.0243,
+            0.141,
+            0.0703,
+            0.0196,
+            0.0208,
+            0.0193,
+            0.0186,
+            0.0208,
+            0.0437,
+            0.0197,
+            0.0193,
+            0.019,
+            0.1941,
+            0.0211,
+            0.0204
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_41",
+              "title": "Java (programming language)",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0164,
+          "meanLatencyMs": 0.0193,
+          "allLatenciesMs": [
+            0.0169,
+            0.0156,
+            0.0163,
+            0.0187,
+            0.0167,
+            0.0182,
+            0.0426,
+            0.0417,
+            0.0147,
+            0.0151,
+            0.0171,
+            0.0162,
+            0.0156,
+            0.027,
+            0.0151,
+            0.0147,
+            0.0147,
+            0.0175,
+            0.0166,
+            0.0155
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_41",
+              "title": "Java (programming language)",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.1043,
+          "meanLatencyMs": 0.135,
+          "allLatenciesMs": [
+            0.3241,
+            0.117,
+            0.0991,
+            0.2222,
+            0.1276,
+            0.1067,
+            0.2431,
+            0.1877,
+            0.0964,
+            0.0949,
+            0.0938,
+            0.0938,
+            0.1737,
+            0.1216,
+            0.0967,
+            0.0936,
+            0.0939,
+            0.0979,
+            0.1141,
+            0.102
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_41",
+              "title": "Java (programming language)",
+              "score": 0.5921,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.1,
+          "meanLatencyMs": 0.1174,
+          "allLatenciesMs": [
+            0.1081,
+            0.1078,
+            0.0996,
+            0.2058,
+            0.1259,
+            0.134,
+            0.229,
+            0.1645,
+            0.0942,
+            0.0938,
+            0.0942,
+            0.0944,
+            0.1128,
+            0.0975,
+            0.1059,
+            0.0929,
+            0.0934,
+            0.0946,
+            0.0991,
+            0.1004
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_41",
+              "title": "Java (programming language)",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q16",
+      "category": "Ambiguous",
+      "query": "Python",
+      "description": "Ambiguous query testing language vs biological species",
+      "relevantDocIds": [
+        "doc_42",
+        "doc_20",
+        "doc_21"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0195,
+          "meanLatencyMs": 0.0218,
+          "allLatenciesMs": [
+            0.0214,
+            0.0216,
+            0.0202,
+            0.027,
+            0.0181,
+            0.0188,
+            0.0484,
+            0.0323,
+            0.0214,
+            0.0179,
+            0.0178,
+            0.0177,
+            0.0209,
+            0.0198,
+            0.0192,
+            0.0186,
+            0.0184,
+            0.0181,
+            0.0179,
+            0.0199
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_42",
+              "title": "Python (programming language)",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0152,
+          "meanLatencyMs": 0.0161,
+          "allLatenciesMs": [
+            0.0155,
+            0.0158,
+            0.015,
+            0.0162,
+            0.0143,
+            0.0152,
+            0.0321,
+            0.0208,
+            0.0139,
+            0.0151,
+            0.0137,
+            0.0142,
+            0.0155,
+            0.0154,
+            0.0151,
+            0.0139,
+            0.0149,
+            0.0155,
+            0.0152,
+            0.0144
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_42",
+              "title": "Python (programming language)",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0958,
+          "meanLatencyMs": 0.1119,
+          "allLatenciesMs": [
+            0.1022,
+            0.1007,
+            0.0988,
+            0.1355,
+            0.1262,
+            0.132,
+            0.2329,
+            0.1787,
+            0.0939,
+            0.0922,
+            0.0934,
+            0.0936,
+            0.098,
+            0.095,
+            0.0957,
+            0.0927,
+            0.0935,
+            0.0919,
+            0.0959,
+            0.0953
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_42",
+              "title": "Python (programming language)",
+              "score": 0.4234,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0982,
+          "meanLatencyMs": 0.1106,
+          "allLatenciesMs": [
+            0.1029,
+            0.1014,
+            0.1048,
+            0.1314,
+            0.126,
+            0.1012,
+            0.236,
+            0.1649,
+            0.0937,
+            0.0948,
+            0.0977,
+            0.0929,
+            0.0987,
+            0.0959,
+            0.0951,
+            0.0928,
+            0.0999,
+            0.0932,
+            0.0936,
+            0.0956
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_42",
+              "title": "Python (programming language)",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q17",
+      "category": "Ambiguous",
+      "query": "Mercury",
+      "description": "Ambiguous query testing metallic element vs planetary body",
+      "relevantDocIds": [
+        "doc_43",
+        "doc_27"
+      ],
+      "totalRelevantInCorpus": 2,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0186,
+          "meanLatencyMs": 0.0226,
+          "allLatenciesMs": [
+            0.0195,
+            0.0214,
+            0.0207,
+            0.0209,
+            0.0181,
+            0.0182,
+            0.0475,
+            0.0283,
+            0.0177,
+            0.0177,
+            0.0176,
+            0.0177,
+            0.0189,
+            0.0184,
+            0.0191,
+            0.0587,
+            0.0188,
+            0.0176,
+            0.0178,
+            0.0181
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_43",
+              "title": "Mercury (element)",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0144,
+          "meanLatencyMs": 0.017,
+          "allLatenciesMs": [
+            0.0154,
+            0.0149,
+            0.0158,
+            0.0147,
+            0.0141,
+            0.0149,
+            0.034,
+            0.0179,
+            0.014,
+            0.0138,
+            0.0139,
+            0.014,
+            0.0143,
+            0.0144,
+            0.014,
+            0.043,
+            0.0146,
+            0.0137,
+            0.0142,
+            0.0139
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_43",
+              "title": "Mercury (element)",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0996,
+          "meanLatencyMs": 0.1146,
+          "allLatenciesMs": [
+            0.1032,
+            0.1001,
+            0.1448,
+            0.1308,
+            0.1259,
+            0.0991,
+            0.2763,
+            0.1057,
+            0.1,
+            0.0934,
+            0.0927,
+            0.0925,
+            0.0972,
+            0.0945,
+            0.0946,
+            0.131,
+            0.0934,
+            0.0932,
+            0.093,
+            0.1307
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_43",
+              "title": "Mercury (element)",
+              "score": 0.3789,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0982,
+          "meanLatencyMs": 0.1081,
+          "allLatenciesMs": [
+            0.1014,
+            0.1009,
+            0.1015,
+            0.1305,
+            0.1272,
+            0.0985,
+            0.2488,
+            0.0999,
+            0.0944,
+            0.0938,
+            0.0936,
+            0.0999,
+            0.0978,
+            0.0952,
+            0.0945,
+            0.1097,
+            0.0927,
+            0.0927,
+            0.0934,
+            0.0956
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_43",
+              "title": "Mercury (element)",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q18",
+      "category": "Ambiguous",
+      "query": "Jaguar",
+      "description": "Ambiguous query testing apex predator vs luxury car brand",
+      "relevantDocIds": [
+        "doc_44",
+        "doc_37"
+      ],
+      "totalRelevantInCorpus": 2,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0184,
+          "meanLatencyMs": 0.0213,
+          "allLatenciesMs": [
+            0.0205,
+            0.0207,
+            0.0213,
+            0.0197,
+            0.0183,
+            0.0181,
+            0.0684,
+            0.0195,
+            0.018,
+            0.0175,
+            0.0177,
+            0.0184,
+            0.0196,
+            0.0184,
+            0.0177,
+            0.0201,
+            0.0178,
+            0.0175,
+            0.0175,
+            0.0189
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_44",
+              "title": "Jaguar",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0144,
+          "meanLatencyMs": 0.0174,
+          "allLatenciesMs": [
+            0.0527,
+            0.0149,
+            0.0159,
+            0.0144,
+            0.0139,
+            0.0142,
+            0.0341,
+            0.0147,
+            0.0146,
+            0.0144,
+            0.0136,
+            0.0139,
+            0.0149,
+            0.0141,
+            0.0154,
+            0.0157,
+            0.0138,
+            0.014,
+            0.0138,
+            0.0143
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_44",
+              "title": "Jaguar",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0952,
+          "meanLatencyMs": 0.1053,
+          "allLatenciesMs": [
+            0.1009,
+            0.1006,
+            0.1,
+            0.13,
+            0.1235,
+            0.0957,
+            0.2325,
+            0.0991,
+            0.0928,
+            0.0911,
+            0.0917,
+            0.0925,
+            0.0981,
+            0.0936,
+            0.1004,
+            0.0947,
+            0.0915,
+            0.0915,
+            0.0922,
+            0.0942
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_44",
+              "title": "Jaguar",
+              "score": 0.3066,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.097,
+          "meanLatencyMs": 0.1073,
+          "allLatenciesMs": [
+            0.1008,
+            0.1007,
+            0.1006,
+            0.1403,
+            0.1587,
+            0.0963,
+            0.2052,
+            0.0994,
+            0.1014,
+            0.0936,
+            0.0932,
+            0.0928,
+            0.0977,
+            0.095,
+            0.0977,
+            0.0949,
+            0.0941,
+            0.0933,
+            0.093,
+            0.0963
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_44",
+              "title": "Jaguar",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q19",
+      "category": "Ambiguous",
+      "query": "Apple",
+      "description": "Ambiguous query testing technology company vs fruit",
+      "relevantDocIds": [
+        "doc_45",
+        "doc_31",
+        "doc_10"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.019,
+          "meanLatencyMs": 0.0414,
+          "allLatenciesMs": [
+            0.019,
+            0.0206,
+            0.02,
+            0.0208,
+            0.0209,
+            0.0179,
+            0.3128,
+            0.0275,
+            0.019,
+            0.0174,
+            0.1624,
+            0.018,
+            0.0186,
+            0.023,
+            0.0186,
+            0.0199,
+            0.0176,
+            0.0174,
+            0.018,
+            0.018
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0147,
+          "meanLatencyMs": 0.0176,
+          "allLatenciesMs": [
+            0.0158,
+            0.0179,
+            0.0148,
+            0.0146,
+            0.0145,
+            0.0152,
+            0.0474,
+            0.0283,
+            0.0149,
+            0.0139,
+            0.0225,
+            0.0145,
+            0.0146,
+            0.0143,
+            0.0176,
+            0.0154,
+            0.0139,
+            0.0137,
+            0.014,
+            0.0144
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0993,
+          "meanLatencyMs": 0.1211,
+          "allLatenciesMs": [
+            0.1034,
+            0.0994,
+            0.0998,
+            0.1291,
+            0.1282,
+            0.0957,
+            0.2087,
+            0.4066,
+            0.0937,
+            0.1006,
+            0.098,
+            0.0917,
+            0.0992,
+            0.0952,
+            0.1017,
+            0.0993,
+            0.0924,
+            0.0916,
+            0.0919,
+            0.0961
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 0.5831,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.097,
+          "meanLatencyMs": 0.143,
+          "allLatenciesMs": [
+            0.1026,
+            0.5761,
+            0.1064,
+            0.1309,
+            0.1298,
+            0.0963,
+            0.2059,
+            0.1151,
+            0.0941,
+            0.0931,
+            0.0968,
+            0.0934,
+            0.0968,
+            0.0958,
+            0.3495,
+            0.0975,
+            0.0971,
+            0.0931,
+            0.0932,
+            0.0955
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q20",
+      "category": "Rare/Specific",
+      "query": "photovoltaic",
+      "description": "Specific scientific query for photoelectric effect conversion",
+      "relevantDocIds": [
+        "doc_32",
+        "doc_25",
+        "doc_35"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 4,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0228,
+          "meanLatencyMs": 0.0289,
+          "allLatenciesMs": [
+            0.0244,
+            0.052,
+            0.0253,
+            0.0518,
+            0.0228,
+            0.0221,
+            0.0622,
+            0.0413,
+            0.0229,
+            0.0209,
+            0.0217,
+            0.021,
+            0.0227,
+            0.0223,
+            0.0353,
+            0.0245,
+            0.0213,
+            0.021,
+            0.0205,
+            0.0221
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 4,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0179,
+          "meanLatencyMs": 0.0275,
+          "allLatenciesMs": [
+            0.018,
+            0.0417,
+            0.0223,
+            0.0194,
+            0.0177,
+            0.0173,
+            0.0459,
+            0.0183,
+            0.0168,
+            0.0172,
+            0.0167,
+            0.0162,
+            0.0168,
+            0.0169,
+            0.0203,
+            0.0162,
+            0.0182,
+            0.0169,
+            0.1564,
+            0.0214
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 4,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1018,
+          "meanLatencyMs": 0.1108,
+          "allLatenciesMs": [
+            0.1031,
+            0.1389,
+            0.104,
+            0.1383,
+            0.1353,
+            0.0989,
+            0.2067,
+            0.1031,
+            0.0954,
+            0.0935,
+            0.0993,
+            0.102,
+            0.0994,
+            0.0971,
+            0.0992,
+            0.1013,
+            0.1023,
+            0.094,
+            0.1028,
+            0.1016
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.2932,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.1777,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0931,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.0847,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 4,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.1071,
+          "meanLatencyMs": 0.1214,
+          "allLatenciesMs": [
+            0.1304,
+            0.1242,
+            0.1655,
+            0.1449,
+            0.1383,
+            0.1047,
+            0.2293,
+            0.107,
+            0.1026,
+            0.1021,
+            0.1103,
+            0.1025,
+            0.1084,
+            0.1071,
+            0.1035,
+            0.1024,
+            0.1366,
+            0.1003,
+            0.1036,
+            0.1051
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.7347,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.5392,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0282,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q21",
+      "category": "Rare/Specific",
+      "query": "geothermal",
+      "description": "Specific query for Earth thermal reservoir power",
+      "relevantDocIds": [
+        "doc_33",
+        "doc_26"
+      ],
+      "totalRelevantInCorpus": 2,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 2,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.0205,
+          "meanLatencyMs": 0.0235,
+          "allLatenciesMs": [
+            0.0222,
+            0.0228,
+            0.025,
+            0.0225,
+            0.0203,
+            0.02,
+            0.0427,
+            0.0207,
+            0.0196,
+            0.0186,
+            0.0375,
+            0.0192,
+            0.0201,
+            0.0192,
+            0.0194,
+            0.019,
+            0.0213,
+            0.0186,
+            0.0214,
+            0.0391
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 2,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.016,
+          "meanLatencyMs": 0.018,
+          "allLatenciesMs": [
+            0.0164,
+            0.0165,
+            0.0175,
+            0.0162,
+            0.0165,
+            0.0154,
+            0.0324,
+            0.0167,
+            0.0151,
+            0.0155,
+            0.026,
+            0.0156,
+            0.0158,
+            0.0158,
+            0.0153,
+            0.0159,
+            0.0155,
+            0.0149,
+            0.0161,
+            0.0311
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 2,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.0994,
+          "meanLatencyMs": 0.1124,
+          "allLatenciesMs": [
+            0.1037,
+            0.1025,
+            0.1096,
+            0.1333,
+            0.1284,
+            0.0967,
+            0.2125,
+            0.1681,
+            0.096,
+            0.0937,
+            0.1187,
+            0.0933,
+            0.0978,
+            0.0984,
+            0.0942,
+            0.0956,
+            0.1004,
+            0.0927,
+            0.0982,
+            0.1147
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.4643,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.0969,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 2,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.1026,
+          "meanLatencyMs": 0.1181,
+          "allLatenciesMs": [
+            0.1088,
+            0.1057,
+            0.1048,
+            0.1364,
+            0.1316,
+            0.1078,
+            0.2382,
+            0.2276,
+            0.0983,
+            0.0961,
+            0.109,
+            0.097,
+            0.1005,
+            0.1191,
+            0.0953,
+            0.0951,
+            0.0982,
+            0.0945,
+            0.0998,
+            0.0984
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.7,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q22",
+      "category": "Rare/Specific",
+      "query": "photosynthesis",
+      "description": "Specific query for plant solar chemical conversion",
+      "relevantDocIds": [
+        "doc_37",
+        "doc_25",
+        "doc_28"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0241,
+          "meanLatencyMs": 0.0274,
+          "allLatenciesMs": [
+            0.024,
+            0.0265,
+            0.0261,
+            0.0256,
+            0.0241,
+            0.0234,
+            0.0564,
+            0.0557,
+            0.0243,
+            0.0225,
+            0.024,
+            0.0225,
+            0.0238,
+            0.0248,
+            0.0236,
+            0.0223,
+            0.0247,
+            0.0227,
+            0.0268,
+            0.0241
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0186,
+          "meanLatencyMs": 0.0247,
+          "allLatenciesMs": [
+            0.0187,
+            0.0189,
+            0.0272,
+            0.02,
+            0.0185,
+            0.0184,
+            0.0397,
+            0.0417,
+            0.0202,
+            0.018,
+            0.0179,
+            0.0178,
+            0.0199,
+            0.0186,
+            0.0185,
+            0.0178,
+            0.0178,
+            0.0181,
+            0.0877,
+            0.0183
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.1025,
+          "meanLatencyMs": 0.1189,
+          "allLatenciesMs": [
+            0.1069,
+            0.1066,
+            0.1087,
+            0.1416,
+            0.1381,
+            0.1024,
+            0.2111,
+            0.2438,
+            0.1048,
+            0.0984,
+            0.1011,
+            0.0998,
+            0.1144,
+            0.1019,
+            0.0996,
+            0.0984,
+            0.0984,
+            0.0981,
+            0.1025,
+            0.1007
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.412,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.1052,
+          "meanLatencyMs": 0.1228,
+          "allLatenciesMs": [
+            0.1065,
+            0.1072,
+            0.1074,
+            0.139,
+            0.1394,
+            0.1016,
+            0.2282,
+            0.2321,
+            0.1339,
+            0.1004,
+            0.1027,
+            0.104,
+            0.1409,
+            0.1013,
+            0.099,
+            0.0982,
+            0.0997,
+            0.0988,
+            0.1129,
+            0.1024
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q23",
+      "category": "Rare/Specific",
+      "query": "semiconductor",
+      "description": "Specific physics query for doping and integrated circuits",
+      "relevantDocIds": [
+        "doc_35",
+        "doc_32",
+        "doc_36",
+        "doc_45"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.0255,
+          "meanLatencyMs": 0.0367,
+          "allLatenciesMs": [
+            0.0263,
+            0.0279,
+            0.0266,
+            0.0443,
+            0.0253,
+            0.0247,
+            0.0589,
+            0.0666,
+            0.0258,
+            0.0233,
+            0.0231,
+            0.0234,
+            0.0283,
+            0.0241,
+            0.0236,
+            0.024,
+            0.0235,
+            0.0307,
+            0.1581,
+            0.0251
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": false
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.0207,
+          "meanLatencyMs": 0.0245,
+          "allLatenciesMs": [
+            0.0215,
+            0.021,
+            0.0208,
+            0.023,
+            0.0207,
+            0.0206,
+            0.044,
+            0.0444,
+            0.0207,
+            0.0196,
+            0.0193,
+            0.0201,
+            0.0231,
+            0.0199,
+            0.0197,
+            0.0194,
+            0.0196,
+            0.02,
+            0.0533,
+            0.0198
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.1056,
+          "meanLatencyMs": 0.1311,
+          "allLatenciesMs": [
+            0.1072,
+            0.1077,
+            0.2944,
+            0.1586,
+            0.1391,
+            0.1024,
+            0.2373,
+            0.2277,
+            0.1025,
+            0.0989,
+            0.0986,
+            0.0988,
+            0.1204,
+            0.107,
+            0.1014,
+            0.1042,
+            0.0985,
+            0.0995,
+            0.1166,
+            0.1012
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.3983,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.209,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.0633,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.1085,
+          "meanLatencyMs": 0.1609,
+          "allLatenciesMs": [
+            0.1168,
+            0.1144,
+            0.1221,
+            0.1714,
+            0.1442,
+            0.1089,
+            0.3348,
+            0.783,
+            0.1079,
+            0.1048,
+            0.1052,
+            0.1055,
+            0.108,
+            0.138,
+            0.1037,
+            0.1284,
+            0.1039,
+            0.1041,
+            0.107,
+            0.1061
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.7,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.3503,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.3,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q24",
+      "category": "Rare/Specific",
+      "query": "microcontroller",
+      "description": "Specific embedded computer engineering query",
+      "relevantDocIds": [
+        "doc_36",
+        "doc_35",
+        "doc_31"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 2,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.0252,
+          "meanLatencyMs": 0.0969,
+          "allLatenciesMs": [
+            0.0252,
+            0.0253,
+            0.0309,
+            0.04,
+            0.0249,
+            0.0237,
+            0.0583,
+            0.0756,
+            0.0257,
+            0.024,
+            0.0229,
+            0.0226,
+            0.0249,
+            0.0449,
+            0.0234,
+            0.035,
+            0.0239,
+            0.0237,
+            0.0255,
+            1.3369
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_36",
+              "title": "Microcontroller",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 2,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.0195,
+          "meanLatencyMs": 0.023,
+          "allLatenciesMs": [
+            0.0209,
+            0.0195,
+            0.0208,
+            0.0227,
+            0.0198,
+            0.0189,
+            0.044,
+            0.0412,
+            0.0189,
+            0.0185,
+            0.0193,
+            0.0187,
+            0.0198,
+            0.0206,
+            0.0179,
+            0.0188,
+            0.0187,
+            0.0184,
+            0.0195,
+            0.0423
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_36",
+              "title": "Microcontroller",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 2,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.1058,
+          "meanLatencyMs": 0.1407,
+          "allLatenciesMs": [
+            0.1079,
+            0.1057,
+            0.1059,
+            0.1445,
+            0.1366,
+            0.1015,
+            0.4935,
+            0.2248,
+            0.0981,
+            0.1006,
+            0.0975,
+            0.2258,
+            0.1037,
+            0.1398,
+            0.0977,
+            0.1062,
+            0.0981,
+            0.0979,
+            0.1004,
+            0.1269
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_36",
+              "title": "Microcontroller",
+              "score": 0.5016,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.1079,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 2,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.1094,
+          "meanLatencyMs": 0.1328,
+          "allLatenciesMs": [
+            0.1138,
+            0.1098,
+            0.112,
+            0.2175,
+            0.1407,
+            0.1054,
+            0.2545,
+            0.2234,
+            0.103,
+            0.109,
+            0.1015,
+            0.1068,
+            0.1052,
+            0.1151,
+            0.1019,
+            0.1366,
+            0.1014,
+            0.1011,
+            0.104,
+            0.1924
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_36",
+              "title": "Microcontroller",
+              "score": 0.7,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.3,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q25",
+      "category": "Natural-Language",
+      "query": "how solar panels work",
+      "description": "Natural question regarding photoelectric photovoltaic operation",
+      "relevantDocIds": [
+        "doc_25",
+        "doc_32",
+        "doc_26"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 0,
+          "relevantFoundInTop10": 0,
+          "precisionAt10": 0,
+          "medianLatencyMs": 0.0345,
+          "meanLatencyMs": 0.0426,
+          "allLatenciesMs": [
+            0.0346,
+            0.0362,
+            0.0364,
+            0.0491,
+            0.0336,
+            0.0331,
+            0.076,
+            0.1172,
+            0.0324,
+            0.0344,
+            0.0326,
+            0.0339,
+            0.0486,
+            0.0331,
+            0.0323,
+            0.0347,
+            0.0317,
+            0.0314,
+            0.0356,
+            0.0548
+          ],
+          "top10Docs": []
+        },
+        "boolean_or": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0321,
+          "meanLatencyMs": 0.0445,
+          "allLatenciesMs": [
+            0.0322,
+            0.0308,
+            0.032,
+            0.0396,
+            0.0314,
+            0.0296,
+            0.0611,
+            0.0643,
+            0.0351,
+            0.0492,
+            0.0275,
+            0.0287,
+            0.0432,
+            0.0278,
+            0.0274,
+            0.1748,
+            0.0359,
+            0.0279,
+            0.0278,
+            0.063
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.6667,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.6667,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.6667,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_1",
+              "title": "PageRank",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3333,
+              "isRelevant": true
+            },
+            {
+              "rank": 9,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.3333,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.2159,
+          "meanLatencyMs": 0.2471,
+          "allLatenciesMs": [
+            0.2295,
+            0.2302,
+            0.221,
+            0.2577,
+            0.2722,
+            0.2071,
+            0.5382,
+            0.4482,
+            0.2064,
+            0.225,
+            0.2037,
+            0.2089,
+            0.2409,
+            0.2133,
+            0.203,
+            0.2088,
+            0.203,
+            0.2008,
+            0.2059,
+            0.2185
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.3342,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.2004,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0761,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_1",
+              "title": "PageRank",
+              "score": 0.0588,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0334,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.03,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.0288,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.027,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.0253,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 9,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.2275,
+          "meanLatencyMs": 0.2619,
+          "allLatenciesMs": [
+            0.2401,
+            0.2342,
+            0.2354,
+            0.303,
+            0.2905,
+            0.2235,
+            0.5288,
+            0.4752,
+            0.2182,
+            0.2217,
+            0.2176,
+            0.225,
+            0.229,
+            0.2259,
+            0.2674,
+            0.2148,
+            0.213,
+            0.2389,
+            0.2136,
+            0.2214
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.8558,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.4449,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_1",
+              "title": "PageRank",
+              "score": 0.3759,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.2037,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1811,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.155,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.1243,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.047,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.0079,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q26",
+      "category": "Natural-Language",
+      "query": "sources of renewable electricity",
+      "description": "Natural question inquiring about clean energy varieties",
+      "relevantDocIds": [
+        "doc_26",
+        "doc_25",
+        "doc_30",
+        "doc_33"
+      ],
+      "totalRelevantInCorpus": 4,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 5,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.0395,
+          "meanLatencyMs": 0.0456,
+          "allLatenciesMs": [
+            0.0392,
+            0.041,
+            0.0396,
+            0.0443,
+            0.0575,
+            0.0368,
+            0.0979,
+            0.0863,
+            0.0452,
+            0.0362,
+            0.0413,
+            0.0402,
+            0.039,
+            0.0366,
+            0.0381,
+            0.0371,
+            0.0393,
+            0.0386,
+            0.0362,
+            0.0413
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.0308,
+          "meanLatencyMs": 0.0343,
+          "allLatenciesMs": [
+            0.035,
+            0.034,
+            0.033,
+            0.0369,
+            0.0336,
+            0.0315,
+            0.0596,
+            0.0605,
+            0.0297,
+            0.0304,
+            0.0307,
+            0.0305,
+            0.0298,
+            0.0296,
+            0.0297,
+            0.0294,
+            0.0295,
+            0.0314,
+            0.0299,
+            0.0309
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 1,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.6667,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.3333,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.2179,
+          "meanLatencyMs": 0.2634,
+          "allLatenciesMs": [
+            0.2301,
+            0.2243,
+            0.2248,
+            0.5504,
+            0.2498,
+            0.2121,
+            0.4795,
+            0.507,
+            0.209,
+            0.2176,
+            0.2071,
+            0.2526,
+            0.2157,
+            0.2153,
+            0.2127,
+            0.2068,
+            0.2078,
+            0.2183,
+            0.2086,
+            0.2182
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3263,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.2186,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.1908,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1863,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.1321,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.1284,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.0879,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.0755,
+              "isRelevant": true
+            },
+            {
+              "rank": 9,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0.0439,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.0369,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 4,
+          "precisionAt10": 0.4,
+          "medianLatencyMs": 0.2276,
+          "meanLatencyMs": 0.2673,
+          "allLatenciesMs": [
+            0.2734,
+            0.2394,
+            0.2825,
+            0.2807,
+            0.2735,
+            0.2292,
+            0.5867,
+            0.4992,
+            0.2245,
+            0.2346,
+            0.2237,
+            0.2298,
+            0.2235,
+            0.2236,
+            0.2186,
+            0.2194,
+            0.2192,
+            0.2193,
+            0.2194,
+            0.226
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.994,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.6757,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.6723,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.4619,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.4207,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.3607,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.3034,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.1836,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0.1319,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.0934,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q27",
+      "category": "Natural-Language",
+      "query": "history of the Roman Empire",
+      "description": "Natural question seeking the founding and expansion of Rome",
+      "relevantDocIds": [
+        "doc_40",
+        "doc_39",
+        "doc_38"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 0,
+          "relevantFoundInTop10": 0,
+          "precisionAt10": 0,
+          "medianLatencyMs": 0.0298,
+          "meanLatencyMs": 0.0364,
+          "allLatenciesMs": [
+            0.0314,
+            0.0335,
+            0.0338,
+            0.035,
+            0.0328,
+            0.0296,
+            0.0834,
+            0.0968,
+            0.0292,
+            0.0304,
+            0.0284,
+            0.0299,
+            0.0297,
+            0.0297,
+            0.0293,
+            0.0283,
+            0.0285,
+            0.0288,
+            0.0294,
+            0.0305
+          ],
+          "top10Docs": []
+        },
+        "boolean_or": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.023,
+          "meanLatencyMs": 0.0259,
+          "allLatenciesMs": [
+            0.025,
+            0.0241,
+            0.0254,
+            0.0264,
+            0.0245,
+            0.0232,
+            0.0501,
+            0.0486,
+            0.0223,
+            0.0248,
+            0.0221,
+            0.0229,
+            0.0237,
+            0.022,
+            0.0226,
+            0.0219,
+            0.0214,
+            0.0221,
+            0.0226,
+            0.0225
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_39",
+              "title": "Ancient Rome",
+              "score": 0.6667,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_40",
+              "title": "Roman Empire",
+              "score": 0.6667,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0.3333,
+              "isRelevant": true
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.207,
+          "meanLatencyMs": 0.2347,
+          "allLatenciesMs": [
+            0.2153,
+            0.2096,
+            0.2359,
+            0.2501,
+            0.2402,
+            0.2074,
+            0.4588,
+            0.4569,
+            0.1975,
+            0.2066,
+            0.1975,
+            0.202,
+            0.2077,
+            0.2031,
+            0.1969,
+            0.1976,
+            0.1956,
+            0.1962,
+            0.1982,
+            0.2202
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_40",
+              "title": "Roman Empire",
+              "score": 0.3901,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_39",
+              "title": "Ancient Rome",
+              "score": 0.3062,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0.2575,
+              "isRelevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 3,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.2077,
+          "meanLatencyMs": 0.2506,
+          "allLatenciesMs": [
+            0.2194,
+            0.2138,
+            0.2168,
+            0.2465,
+            0.2445,
+            0.2061,
+            0.4708,
+            0.5863,
+            0.3687,
+            0.2052,
+            0.2011,
+            0.2066,
+            0.2046,
+            0.2144,
+            0.1995,
+            0.1981,
+            0.1983,
+            0.1988,
+            0.2087,
+            0.2046
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_40",
+              "title": "Roman Empire",
+              "score": 0.7,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_39",
+              "title": "Ancient Rome",
+              "score": 0.2571,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_38",
+              "title": "History",
+              "score": 0,
+              "isRelevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q28",
+      "category": "Natural-Language",
+      "query": "ways to store energy",
+      "description": "Natural question exploring batteries and energy storage",
+      "relevantDocIds": [
+        "doc_29",
+        "doc_26",
+        "doc_25"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 0,
+          "relevantFoundInTop10": 0,
+          "precisionAt10": 0,
+          "medianLatencyMs": 0.0326,
+          "meanLatencyMs": 0.0448,
+          "allLatenciesMs": [
+            0.0324,
+            0.033,
+            0.0359,
+            0.0332,
+            0.0327,
+            0.031,
+            0.0662,
+            0.0445,
+            0.0356,
+            0.031,
+            0.0311,
+            0.0305,
+            0.2274,
+            0.0445,
+            0.0306,
+            0.0343,
+            0.0298,
+            0.0305,
+            0.031,
+            0.0309
+          ],
+          "top10Docs": []
+        },
+        "boolean_or": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.0335,
+          "meanLatencyMs": 0.0357,
+          "allLatenciesMs": [
+            0.0365,
+            0.0338,
+            0.0361,
+            0.0364,
+            0.0349,
+            0.0331,
+            0.0697,
+            0.0385,
+            0.0314,
+            0.0307,
+            0.0304,
+            0.0309,
+            0.0383,
+            0.0474,
+            0.0304,
+            0.0313,
+            0.0299,
+            0.0297,
+            0.0306,
+            0.0349
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.3333,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_27",
+              "title": "Electricity",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_1",
+              "title": "PageRank",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.3333,
+              "isRelevant": true
+            },
+            {
+              "rank": 9,
+              "id": "doc_5",
+              "title": "Search engine indexing",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.3333,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.2108,
+          "meanLatencyMs": 0.2432,
+          "allLatenciesMs": [
+            0.2216,
+            0.2151,
+            0.2473,
+            0.2582,
+            0.4551,
+            0.2047,
+            0.4995,
+            0.2677,
+            0.2028,
+            0.2062,
+            0.2004,
+            0.2048,
+            0.222,
+            0.2284,
+            0.2012,
+            0.2012,
+            0.1995,
+            0.2065,
+            0.202,
+            0.2191
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.1953,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.1871,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.1337,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.1185,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.0704,
+              "isRelevant": true
+            },
+            {
+              "rank": 6,
+              "id": "doc_5",
+              "title": "Search engine indexing",
+              "score": 0.0693,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.0664,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0577,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.0501,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_8",
+              "title": "Vector space model",
+              "score": 0.0448,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.2438,
+          "meanLatencyMs": 0.2786,
+          "allLatenciesMs": [
+            0.2526,
+            0.2455,
+            0.4361,
+            0.4186,
+            0.2908,
+            0.2421,
+            0.5048,
+            0.2577,
+            0.2275,
+            0.2397,
+            0.23,
+            0.2334,
+            0.2307,
+            0.2378,
+            0.2207,
+            0.2462,
+            0.3485,
+            0.2243,
+            0.2219,
+            0.2633
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.8991,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_33",
+              "title": "Geothermal energy",
+              "score": 0.6831,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.5426,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_37",
+              "title": "Photosynthesis",
+              "score": 0.4419,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_5",
+              "title": "Search engine indexing",
+              "score": 0.3795,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_1",
+              "title": "PageRank",
+              "score": 0.3536,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_29",
+              "title": "Battery (electricity)",
+              "score": 0.3402,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_30",
+              "title": "Wind power",
+              "score": 0.3007,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_8",
+              "title": "Vector space model",
+              "score": 0.223,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.2224,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q29",
+      "category": "Natural-Language",
+      "query": "effects of climate change",
+      "description": "Natural question asking about global warming consequences",
+      "relevantDocIds": [
+        "doc_28",
+        "doc_26",
+        "doc_34"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 0,
+          "relevantFoundInTop10": 0,
+          "precisionAt10": 0,
+          "medianLatencyMs": 0.0306,
+          "meanLatencyMs": 0.0364,
+          "allLatenciesMs": [
+            0.0318,
+            0.0366,
+            0.0578,
+            0.0555,
+            0.0344,
+            0.0303,
+            0.0782,
+            0.0373,
+            0.0287,
+            0.03,
+            0.0299,
+            0.0293,
+            0.0302,
+            0.0309,
+            0.0294,
+            0.0323,
+            0.0373,
+            0.0291,
+            0.0285,
+            0.0296
+          ],
+          "top10Docs": []
+        },
+        "boolean_or": {
+          "retrievedCount": 5,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.026,
+          "meanLatencyMs": 0.029,
+          "allLatenciesMs": [
+            0.0331,
+            0.0281,
+            0.0325,
+            0.0323,
+            0.0293,
+            0.0255,
+            0.0711,
+            0.0265,
+            0.0239,
+            0.0249,
+            0.0244,
+            0.0243,
+            0.0245,
+            0.0247,
+            0.0238,
+            0.027,
+            0.0298,
+            0.0239,
+            0.0239,
+            0.0267
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.6667,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.6667,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.6667,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.3333,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.3333,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 5,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.2113,
+          "meanLatencyMs": 0.2377,
+          "allLatenciesMs": [
+            0.2228,
+            0.2132,
+            0.2507,
+            0.2856,
+            0.2539,
+            0.2169,
+            0.4769,
+            0.3219,
+            0.1995,
+            0.2084,
+            0.2019,
+            0.2094,
+            0.2025,
+            0.2747,
+            0.1974,
+            0.2037,
+            0.1979,
+            0.2019,
+            0.1991,
+            0.2148
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.2704,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.1004,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.0938,
+              "isRelevant": true
+            },
+            {
+              "rank": 4,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.0689,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.0417,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 5,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.2195,
+          "meanLatencyMs": 0.2432,
+          "allLatenciesMs": [
+            0.3025,
+            0.2201,
+            0.2244,
+            0.2527,
+            0.3232,
+            0.2196,
+            0.473,
+            0.2669,
+            0.2135,
+            0.2443,
+            0.2195,
+            0.2164,
+            0.2092,
+            0.2375,
+            0.2129,
+            0.2083,
+            0.204,
+            0.2037,
+            0.2027,
+            0.2089
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_28",
+              "title": "Climate change",
+              "score": 0.85,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_26",
+              "title": "Renewable energy",
+              "score": 0.4796,
+              "isRelevant": true
+            },
+            {
+              "rank": 3,
+              "id": "doc_25",
+              "title": "Solar energy",
+              "score": 0.2232,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_34",
+              "title": "Electric vehicle",
+              "score": 0.1964,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_32",
+              "title": "Photovoltaics",
+              "score": 0.083,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q30",
+      "category": "Natural-Language",
+      "query": "how computers communicate",
+      "description": "Natural question regarding network protocols and interconnections",
+      "relevantDocIds": [
+        "doc_31",
+        "doc_10",
+        "doc_15"
+      ],
+      "totalRelevantInCorpus": 3,
+      "results": {
+        "boolean_and": {
+          "retrievedCount": 1,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0299,
+          "meanLatencyMs": 0.0509,
+          "allLatenciesMs": [
+            0.048,
+            0.0337,
+            0.0336,
+            0.0337,
+            0.0315,
+            0.0292,
+            0.087,
+            0.0334,
+            0.0295,
+            0.0289,
+            0.0283,
+            0.0292,
+            0.0303,
+            0.3671,
+            0.0294,
+            0.0296,
+            0.0281,
+            0.0283,
+            0.0287,
+            0.0309
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 1,
+              "isRelevant": true
+            }
+          ]
+        },
+        "boolean_or": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 1,
+          "precisionAt10": 0.1,
+          "medianLatencyMs": 0.0329,
+          "meanLatencyMs": 0.0407,
+          "allLatenciesMs": [
+            0.0533,
+            0.0374,
+            0.0367,
+            0.037,
+            0.0366,
+            0.034,
+            0.069,
+            0.0346,
+            0.0315,
+            0.0314,
+            0.0309,
+            0.0321,
+            0.0319,
+            0.1258,
+            0.0317,
+            0.0313,
+            0.0318,
+            0.0324,
+            0.0313,
+            0.0334
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 1,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_16",
+              "title": "Alan Turing",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_20",
+              "title": "Artificial intelligence",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_9",
+              "title": "Boolean data type",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_24",
+              "title": "Claude Shannon",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_23",
+              "title": "Deep learning",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_4",
+              "title": "Inverted index",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_7",
+              "title": "Larry Page",
+              "score": 0.5,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_13",
+              "title": "Linear algebra",
+              "score": 0.5,
+              "isRelevant": false
+            }
+          ]
+        },
+        "tfidf": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 2,
+          "precisionAt10": 0.2,
+          "medianLatencyMs": 0.1655,
+          "meanLatencyMs": 0.1861,
+          "allLatenciesMs": [
+            0.1758,
+            0.1956,
+            0.17,
+            0.1974,
+            0.2065,
+            0.161,
+            0.3671,
+            0.1694,
+            0.1554,
+            0.1653,
+            0.1596,
+            0.1623,
+            0.1583,
+            0.261,
+            0.1657,
+            0.1539,
+            0.1529,
+            0.1634,
+            0.1545,
+            0.2262
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 0.2356,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_22",
+              "title": "Natural language processing",
+              "score": 0.0978,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_7",
+              "title": "Larry Page",
+              "score": 0.0718,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_15",
+              "title": "Tim Berners-Lee",
+              "score": 0.0707,
+              "isRelevant": true
+            },
+            {
+              "rank": 5,
+              "id": "doc_16",
+              "title": "Alan Turing",
+              "score": 0.0643,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 0.0611,
+              "isRelevant": false
+            },
+            {
+              "rank": 7,
+              "id": "doc_20",
+              "title": "Artificial intelligence",
+              "score": 0.0472,
+              "isRelevant": false
+            },
+            {
+              "rank": 8,
+              "id": "doc_36",
+              "title": "Microcontroller",
+              "score": 0.0466,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_35",
+              "title": "Semiconductor",
+              "score": 0.0251,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_24",
+              "title": "Claude Shannon",
+              "score": 0.0242,
+              "isRelevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrievedCount": 10,
+          "relevantFoundInTop10": 3,
+          "precisionAt10": 0.3,
+          "medianLatencyMs": 0.2043,
+          "meanLatencyMs": 0.229,
+          "allLatenciesMs": [
+            0.2107,
+            0.2164,
+            0.2087,
+            0.2238,
+            0.2281,
+            0.1977,
+            0.5747,
+            0.1999,
+            0.1878,
+            0.1885,
+            0.2802,
+            0.2976,
+            0.1846,
+            0.1954,
+            0.1977,
+            0.1794,
+            0.1802,
+            0.2244,
+            0.1802,
+            0.2241
+          ],
+          "top10Docs": [
+            {
+              "rank": 1,
+              "id": "doc_31",
+              "title": "Computer network",
+              "score": 0.751,
+              "isRelevant": true
+            },
+            {
+              "rank": 2,
+              "id": "doc_22",
+              "title": "Natural language processing",
+              "score": 0.3173,
+              "isRelevant": false
+            },
+            {
+              "rank": 3,
+              "id": "doc_4",
+              "title": "Inverted index",
+              "score": 0.3,
+              "isRelevant": false
+            },
+            {
+              "rank": 4,
+              "id": "doc_5",
+              "title": "Search engine indexing",
+              "score": 0.2802,
+              "isRelevant": false
+            },
+            {
+              "rank": 5,
+              "id": "doc_7",
+              "title": "Larry Page",
+              "score": 0.2757,
+              "isRelevant": false
+            },
+            {
+              "rank": 6,
+              "id": "doc_10",
+              "title": "World Wide Web",
+              "score": 0.2382,
+              "isRelevant": true
+            },
+            {
+              "rank": 7,
+              "id": "doc_15",
+              "title": "Tim Berners-Lee",
+              "score": 0.2369,
+              "isRelevant": true
+            },
+            {
+              "rank": 8,
+              "id": "doc_16",
+              "title": "Alan Turing",
+              "score": 0.2329,
+              "isRelevant": false
+            },
+            {
+              "rank": 9,
+              "id": "doc_20",
+              "title": "Artificial intelligence",
+              "score": 0.2172,
+              "isRelevant": false
+            },
+            {
+              "rank": 10,
+              "id": "doc_45",
+              "title": "Apple Inc.",
+              "score": 0.1439,
+              "isRelevant": false
+            }
+          ]
+        }
+      }
+    }
+  ]
+};
